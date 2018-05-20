@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock Paper Scissors</title>
+  </head>
+<body>
+  <h2>Press "R" for Rock, "P" for paper, or "S" for Scissors</h2>
+  <h3 id="wins"></h3>
+  <h3 id="losses"></h3>
+  <h3 id="ties"></h3>
+
+<script>
+  var computerOption = ['r', 'p', 's'];
+  //set initial wins and losses
+  var wins = 0;
+  var losses = 0;
+  var ties = 0;
+
+  document.onkeyup = (event) => {
+    //figure out which key the user pressed
+    var x = event.keyCode;
+    var userChoice = String.fromCharCode(x).toLowerCase();
+
+    //if the key is a r, p, or s we play the game
+    if(userChoice == 'r' || userChoice == 'p' || userChoice == 's'){
+      //console.log('user choice is ' + userChoice);
+      //computer generates random number and picks a sign
+      var ranNumber = Math.floor(Math.random() * 3);
+      var computerChoice = computerOption[ranNumber];
+      //console.log('computer choice ' + computerChoice)
+      //conditional statements for the game
+      if(computerChoice == 'r'){
+        console.log('computer choice is rock')
+        if(userChoice == 'r'){
+          console.log('tie')
+          ties++;
+        }else if(userChoice == 'p'){
+          console.log('user wins w paper over rock')
+          wins++;
+        }else if(userChoice == 's'){
+          console.log('computer wins w rock over scissor')
+          losses++;
+        }
+      }else if (computerChoice == 'p') {
+        console.log('computer choice is paper')
+        if(userChoice == 'r'){
+          console.log('computer wins w paper over rock')
+          losses++;
+        }else if(userChoice == 'p'){
+          console.log('tie')
+          ties++;
+        }else if(userChoice == 's'){
+          console.log('user wins w scissor over paper')
+          wins++;
+        }
+      }else if(computerChoice == 's'){
+        console.log('computer choice is rock')
+        if(userChoice == 'r'){
+          console.log('tie')
+          ties++
+        }else if(userChoice == 'p'){
+          console.log('user wins w paper over rock')
+          wins++
+        }else if(userChoice == 's'){
+          console.log('computer wins w rock over scissors')
+          losses++
+        }
+
+      }
+      //generate wins and losses to the DOM dynamically
+      var winDom = document.getElementById('wins');
+      winDom.innerHTML = '<h3>Wins: ' + wins + '</h3>'
+      var lossDom = document.getElementById('losses');
+      lossDom.innerHTML = '<h3>Losses: ' + losses + '</h3>'
+      var tieDom = document.getElementById('ties');
+      tieDom.innerHTML = '<h3>Ties: ' + ties + '</h3>'
+    }
+
+  }
+
+
+</script>
+</body>
+</html>
